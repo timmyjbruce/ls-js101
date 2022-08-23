@@ -1,0 +1,25 @@
+{
+  "name": "ls-js101",
+  "version": "1.0.0",
+  "description": "Code, and workings for course JS101 within the Launch School curriculum.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timmyjbruce/ls-js101.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timmyjbruce/ls-js101/issues"
+  },
+  "homepage": "https://github.com/timmyjbruce/ls-js101#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.12.1",
+    "eslint-cli": "^1.1.1"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "en" : {
+    "language" : "Select language | Seleccione el idioma:\n   en) English es) Española",
+    "welcome" : "Welcome to Calculator!",
+    "q1" : "What's the first number?",
+    "q2" : "What's the second number?",
+    "q3" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "valid" : "Hmm... that doesn't look like a valid input. Please try again",
+    "result" : "The result is: ",
+    "thanks" : "Thanks for using calculator",
+    "again" : "Would you like to calculate something else? Type:\ny) Yes, n) No",
+    "restart" : "Let's do it!"
+  },
+  "es" : {
+    "language" : "Select language | Seleccione el idioma:\n   en) English es) Española",
+    "welcome" : "¡Bienvenido a Calculadora!",
+    "q1" : "¿Cuál es el primer número?",
+    "q2" : "¿Cuál es el segundo número?",
+    "q3" : "¿Qué operación le gustaría realizar?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
+    "valid" : "Hmm... eso no parece una entrada válida. Inténtalo de nuevo",
+    "result" : "El resultado es:",
+    "thanks" : "gracias por usar la calculadora",
+    "again" : "¿Te gustaría calcular algo más?\nEscriba: y) Sí, n) No",
+    "restart" : "¡Vamos a hacerlo!"
+  }
+}

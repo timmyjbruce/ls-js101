@@ -1,0 +1,28 @@
+{
+   "en" : {
+     "language" : "Please select your language | Tīpakohia te reo\n   1) English  2) Te Reo Māori",
+     "welcome" : "Welcome to the Loan Calculator!",
+     "q1" : "How much do you need loan for?",
+     "q2" : "How long is the payment period in years and months?",
+     "q3" : "What is the annual rate of interest (APR)?",
+     "invalid" : "Hmm... that doesn't look like a valid input. Please try again:",
+     "payment_monthly" : "The monthly payment will be:",
+     "payment_total" : "The total repaid will be:",
+     "payment_interest" : "The total interest will be:",
+     "thanks" : "Thanks for using the Loan Calculator!",
+     "repeat" : "Would you like to calculate another loan?\n   y) Yes, n) No"
+   },
+   "mā" : {
+     "language" : "Please select your language | Tīpakohia te reo\n   1) English  2) Te Reo Māori",
+     "welcome" : "Nau mai ki te Tatau Tarewa!",
+     "q1" : "Kia pehea te nui o te moni tarewa?",
+     "q2" : "Kia pehea te roa o te wa utu i roto i nga tau me nga marama?",
+     "q3" : "He aha te reiti huamoni a-tau (APR)?",
+     "invalid" : "Hmm... karekau tena ahua he whakauru whaimana. Me ngana ano:",
+     "payment_monthly" : "Ko te utu ia marama ko:",
+     "payment_total" : "Ko te katoa o nga utu ka:",
+     "payment_interest" : "Ko te katoa o nga huamoni ka:",
+     "thanks" : "Nga mihi mo te whakamahi i te Tatau Tarewa!",
+     "repeat" : "Kei te pirangi koe ki te tatau i tetahi atu nama?\n   y) Ae, n) Kao"
+     }
+}

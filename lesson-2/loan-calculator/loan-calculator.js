@@ -2,15 +2,7 @@ const readline = require('readline-sync');
 const TEXT_CONTENT = require('./loan-calculator-text.json');
 let lang = 'en';
 let defaultPrompt = '=> ';
-let correction = 0;
-
-// The value of 'correction' is incremented everytime a number is put through,
-// the 'messageUser' function. Without out it arguments passed via 'num' are
-// incrementally moved by 1 char in the node output. It's a bit of a hack but I
-// can't for the life of me figure out why it's needed. I could have used a loop
-// to increment within the function but I feel leaving it here makes the hack
-// nice and obvious - at least until I figure out a better way to address it.
-// Any assitance would be appreciated!
+let correction = 0;  // Note at bottom
 
 // Helper functions
 
@@ -127,3 +119,14 @@ do {
 } while (true);
 
 messageUser('thanks');
+
+
+
+
+// The value of 'correction' is incremented everytime a number is put through,
+// a 'prompUser..' function. Without the padding of arguments passed via 'num' 
+// is incremented by 1, (visible in the node output). It's a bit hacky but I
+// can't for the life of me figure out why it's needed. I could have used a loop
+// to increment within the function but I feel leaving it here makes the hack
+// nice and obvious - at least until I figure out a better way to address it.
+// Any assitance would be appreciated!

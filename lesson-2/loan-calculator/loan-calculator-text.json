@@ -2,7 +2,7 @@
    "en" : {
      "language" : "Please select your language | Tīpakohia te reo\n   1) English  2) Te Reo Māori",
      "welcome" : "Welcome to the Loan Calculator!",
-     "q1" : "How much do you need loan for?",
+     "q1" : "How much do you a need loan for?",
      "q2" : "How long is the payment period in years and months?",
      "q3" : "What is the annual rate of interest (APR)?",
      "invalid" : "Hmm... that doesn't look like a valid input. Please try again:",

@@ -1,0 +1,30 @@
+{
+  "winningLogic" : {
+    "rock" : "['spock', 'paper']",
+    "paper" : "['lizard', 'scissors']",
+    "scissors" : "['rock', 'spock']",
+    "spock" : "['paper', 'lizard']",
+    "lizard" : "['rock', 'scissors']"
+  },
+
+  "validInputs" : {
+    "rock" : "r",
+    "paper" : "p",
+    "scissors" : "s",
+    "spock" : "v",
+    "lizard" : "l"
+  },
+  
+  "text" : {
+    "prompt" : "=> ",
+    "invalid" : "That's not a valid choice!",
+    "welcome" : "Welcome to Rock Paper Scissors ++",
+    "compWin" : "Computer wins!",
+    "userWin" : "You win!",
+    "compWinRound" : "Computer wins the round!",
+    "userWinRound" : "You win the round! Hurrah!!!",
+    "tie" : "Its a tie!",
+    "playAgain" : "Do you want to play again (y/n)?"
+  }
+
+}

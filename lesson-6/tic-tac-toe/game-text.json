@@ -1,0 +1,21 @@
+{
+  "welcome": "\n### Welome to TicTacToe! ###\n",
+  "thanks": "Thanks for playing TicTacToe",
+  "q": {
+    "move": "Choose an available square from ",
+    "moveShort": "Choose a numbered square:",
+    "help": "Enter '#' to show square numbers",
+    "continue": "Would you like to play best of 3 (Y/N)",
+    "size": "To start choose your game boards width and height. \nEnter: "
+  },
+  "start": "\n Alright, lets get started!",
+  "computerTurn": "\n Computer played: ",
+  "rules": "First to get 3 in a row wins!",
+  "invalid": "That's an invalid choice, please try again",
+  "draw": "This round is a draw!",
+  "score": "This score is ",
+  "winner": { 
+    "X": "### X's win this round! ###",
+    "O": "### O's win this round! ###"
+  } 
+}

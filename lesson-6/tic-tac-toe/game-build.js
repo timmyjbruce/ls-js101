@@ -3,7 +3,8 @@ let buildGame = function(game, MIN_COMBO_LENGTH, NO_MOVE) {
 let gameData = {}
 gameData.board = generateBoard(); 
 gameData.combos = generateCombos()
-gameData.score = { X: 0, O: 0, draws: 0, rounds: 0}
+gameData.score = { X: 0, O: 0, draws: 0}
+gameData.rounds = 0;
 gameData.turnCountdown = game.moveCount;
 gameData.moves = generateMoves();
 
@@ -12,7 +13,7 @@ gameData.moves = generateMoves();
 function generateBoard() {
   let [fullBoard, row] = [[], []];
   for (let num = 1; num <= game.moveCount; num++) {
-    row.push(num);
+    row.push(String(num));
     if (num % game.boardSize === 0) fullBoard.push(row.splice(0));
   }
   board = fullBoard;
@@ -39,7 +40,8 @@ function generateCombos() {
   let diagonalsRL = transposeDiagonally(diagonalsLR);
   
   let allCombos = horizontals.concat(verticals, diagonalsLR, diagonalsRL);
-  allCombos = allCombos.concat(getSubCombos(allCombos))
+  allCombos = allCombos.concat(getSubCombos(allCombos));
+  allCombos = allCombos.map(combo => combo.map(move => String(move)))
   return allCombos;
 }
 
@@ -67,7 +69,7 @@ function getDiagonalCombos() {
       countPrior = count;
 
       let move = 1 + count + num + (num * game.boardSize); // Moves along board to                                               // get next move in combo
-      if (move <= game.moveCount) combo.push(move);        // get next move in combo
+      if (move <= game.moveCount) combo.push(String(move));        // get next move in combo
     }
   }
   return diagonalCombos;
@@ -102,9 +104,9 @@ function getSubCombos(array) {
 }
 
 function getBoardIndexesFor(val) {
-  let rowIndex, 
-      colIndex;
-  board.map((row, index) => {
+  let rowIndex, colIndex;
+
+  gameData.board.map((row, index) => {
     if (row.includes(val)) {
       [rowIndex, colIndex] = [index, row.indexOf(val)];
     }

@@ -528,7 +528,7 @@
 
 
 
-  //  1 | 2 | 3 
+//  1 | 2 | 3 
 // -----------
 //  4 | 5 | 6 
 // -----------
@@ -553,7 +553,27 @@
 // -------------------
 //  21| 22| 23| 24| 25
 
+//  1 | 2 | 3 | 4 | 5 | 6 
+// -----------------------
+//  7 | 8 | 9 | 10| 11| 12
+// -----------------------
+//  13| 14| 15| 16| 17| 18
+// -----------------------
+//  19| 20| 21| 22| 23| 24
+// -----------------------
+//  25| 26| 27| 28| 29| 30
+// -----------------------
+//  31| 32| 33| 34| 35| 36
 
+
+// Board size of 7:
+// Supermove: 25
+
+// Board size of 8:
+// Supermoves: 28, 29, 36, 37
+
+// Board size of 9:
+// Supermove: 41
 
 Examples: 
 
@@ -593,3 +613,69 @@ Examples:
 // - Push move to smartMoves
 // - Return moves
 // 
+
+
+
+
+
+
+// PEDAC for game switching
+
+// ask if player who should go first them or computer
+// set reponse to 'currentPlayer' in game object to respective ID
+
+
+// Start chooseSquare
+// if currentPlayer equals player
+// run update game with getPlayerMove, currentPlayer
+// else run update game with getComputerMove, currentPlayer
+
+
+// Start alternatePlayer
+// set tempVar to currentPlayer
+// set currentPlayer to nextPlayer
+// set nextPlayer to currentPlayer
+
+
+
+// 3x3 debugging ####
+
+// Imminent draw
+// game.moves = {
+//   '1': 'O',
+//   '2': 'X',
+//   '3': 'X',
+//   '4': ' ',
+//   '5': 'O',
+//   '6': 'X',
+//   '7': 'X',
+//   '8': 'O',
+//   '9': 'X'
+// }
+
+
+// Near draw
+// game.moves = {
+//   '1': 'O',
+//   '2': 'X',
+//   '3': 'X',
+//   '4': ' ',
+//   '5': 'O',
+//   '6': ' ',
+//   '7': ' ',
+//   '8': 'O',
+//   '9': 'X'
+// }
+
+// Near win
+// game.moves = {
+//   '1': 'O',
+//   '2': 'X',
+//   '3': 'X',
+//   '4': ' ',
+//   '5': 'X',
+//   '6': ' ',
+//   '7': ' ',
+//   '8': 'O',
+//   '9': 'O'
+// }

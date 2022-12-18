@@ -1,34 +1,34 @@
-// Displaying the game
-// -------------------------------------------------------
-// Game display is generated dynamically based on boardSize value and other game
-// properties. An argument can be passed to optionally show the tile number on
-// empty tiles (useful on larger boards).
 
-let displayGame = function(game, NO_MOVE, extraDisplay) {
+// Displaying the game board
+// -------------------------------------------------------
+// Game board display is generated dynamically based on boardSize and other
+// gameData values. An optionally argument can be passed to print a board that
+// shows the tile number on empty tiles (useful on larger boards).
+
+let displayGame = function(gameData, NO_MOVE, extraDisplay) {
 
 const [VERT_DIV, SPACER] = ['|', ' '];
-let horzDiv = '-'.repeat((game.boardSize * 4) - 1);
-let lastIndex = game.boardSize - 1;
+const HORZ_DIV = '-'.repeat((gameData.boardSize * 4) - 1);
+let lastIndex = gameData.boardSize - 1;
 
 console.log(SPACER);
 displayBoard()
 console.log(SPACER)
 
-
 function displayBoard() {
-  game.board.map((row, rowIndex) => {
+  gameData.board.map((row, rowIndex) => {
   row = row.map((move, moveIndex) => {
-    move = formatMove(move);
-    if (moveIndex !== lastIndex) move += VERT_DIV;
-    return move;
+    tile = formatTile(move);
+    if (moveIndex !== lastIndex) tile += VERT_DIV;
+    return tile;
   })
   console.log(row.join(''))
-  if (rowIndex !== lastIndex) console.log(horzDiv)
+  if (rowIndex !== lastIndex) console.log(HORZ_DIV)
   })
 }
 
-function formatMove(moveNum){
-  let moveVal = game.moves[moveNum];
+function formatTile(moveNum) {
+  let moveVal = gameData.moves[moveNum];
   
   if (extraDisplay === 'help' && moveVal === NO_MOVE) {
     if (String(moveNum).length <= 1) {

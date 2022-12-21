@@ -425,8 +425,6 @@
 // C + boardSize - (((C + boardsize) % boardsize) * (boardSize - 1))
 
 
-
-
 // ## Test cases for sub combos
 
 // ## Input
@@ -513,9 +511,6 @@
 // };
 
 
-
-
-
 // ### Get help algo
   // Ask player question
   // Get player answer
@@ -525,8 +520,7 @@
   // If valid input 
 
 
-
-
+// Boards for testing
 
 //  1 | 2 | 3 
 // -----------
@@ -575,7 +569,7 @@
 // Board size of 9:
 // Supermove: 41
 
-Examples: 
+// Examples: 
 
 // Board size   Middle squares
 // 1            1
@@ -615,10 +609,6 @@ Examples:
 // 
 
 
-
-
-
-
 // PEDAC for game switching
 
 // ask if player who should go first them or computer
@@ -635,47 +625,3 @@ Examples:
 // set tempVar to currentPlayer
 // set currentPlayer to nextPlayer
 // set nextPlayer to currentPlayer
-
-
-
-// 3x3 debugging ####
-
-// Imminent draw
-// game.moves = {
-//   '1': 'O',
-//   '2': 'X',
-//   '3': 'X',
-//   '4': ' ',
-//   '5': 'O',
-//   '6': 'X',
-//   '7': 'X',
-//   '8': 'O',
-//   '9': 'X'
-// }
-
-
-// Near draw
-// game.moves = {
-//   '1': 'O',
-//   '2': 'X',
-//   '3': 'X',
-//   '4': ' ',
-//   '5': 'O',
-//   '6': ' ',
-//   '7': ' ',
-//   '8': 'O',
-//   '9': 'X'
-// }
-
-// Near win
-// game.moves = {
-//   '1': 'O',
-//   '2': 'X',
-//   '3': 'X',
-//   '4': ' ',
-//   '5': 'X',
-//   '6': ' ',
-//   '7': ' ',
-//   '8': 'O',
-//   '9': 'O'
-// }

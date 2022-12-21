@@ -1,6 +1,6 @@
 {
   "welcome": "\n### Welome to TicTacToe! ###\n",
-  "thanks": "Thanks for playing TicTacToe",
+  "thanks": "Thanks for playing TicTacToe!\n",
   "q": {
     "move": "Choose an available square from ",
     "moveShort": "Enter an available square number:",
@@ -11,15 +11,19 @@
   },
   "playerTurn": "\nYour move was added:",
   "computerTurn": "\nThe computer has played:",
-  "rules": "First to get 3 in a row wins!\n",
+  "rules": {
+    "a": "\n#.FYI on",
+    "b": "sized boards the first to get",
+    "c": "in a row wins! \n  Enter 's' to get started:"
+  },
   "invalid": "That's an invalid choice, please try again",
-  "draw": "### This round is a draw! ###",
-  "drawEarly": "### No one can win from here! It's a draw ###",
-  "playerWinsRounds": "### Player has beat the computer in best of three!  ###",
-  "computerWinsRounds": "### Computer has beat the player in best of three!  ###",
+  "draw": "### This round is a draw! ###\n",
+  "drawEarly": "### Hmm, looks like no one can win from here. It's a draw! ###\n",
+  "playerWinsRounds": "### Player has beat the computer in best of three!  ###\n",
+  "computerWinsRounds": "### Computer has beat the player in best of three!  ###\n",
   "drawRounds": "### 3 rounds have been played, and it's a draw! ###",
   "playerStart": "\nAlright, lets get started!",
-  "computerStart": "\nAlright, the computer made a move, now its your turn!",
+  "computerStart": "\nAlright, the computer made a move, now it's your turn!",
   "score": "This score is ",
   "winner": { 
     "X": "### X's win this round! ###\n",

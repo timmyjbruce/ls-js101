@@ -1,5 +1,6 @@
 
 // Variables -------------------------------------------------------------------
+
 const rlSync = require('readline-sync');
 const TEXT = require('./game-text.json');
 rlSync.setDefaultOptions({prompt: '$ '});
@@ -7,8 +8,9 @@ rlSync.setDefaultOptions({prompt: '$ '});
 const [PLAYER_ID, COMPUTER_ID] = ['X', 'O'];
 const GAME_SIZES = ['3', '4', '5', '6', '7', '8', '9'];
 const EMPTY_MOVE_ID = ' ';
-const DIM_TEXT = '\x1b[2m%s\x1b[0m';
-const ROUND_NUM = 3;
+const COLOR_OF_DIM_TEXT = '\x1b[2m%s\x1b[0m';
+const BASIC_GAME_SIZE = 3;
+const ROUNDS_TO_WIN = 3;
 let gameData = {}; // Contains all generated gameData data
 let startingPlayer = PLAYER_ID;
 let currentPlayer = PLAYER_ID;
@@ -20,6 +22,18 @@ messageUser(TEXT.welcome);
 askGameSize();
 setUpGame();
 askWhoStarts();
+
+// gameData.moves = {
+//   '1': 'O',
+//   '2': 'X',
+//   '3': 'X',
+//   '4': ' ',
+//   '5': 'O',
+//   '6': ' ',
+//   '7': ' ',
+//   '8': 'O',
+//   '9': 'X'
+// }
 
 
 
@@ -55,10 +69,14 @@ function askGameSize() {
 
 function askWhoStarts() {
   let validChoices = ['y', 'c'];
-  messageUser(TEXT.q.startingPlayer + joinOr(validChoices));
+  messageUser(TEXT.q.startingPlayer + joinOr(validChoices, "'"));
   let choice = rlSync.prompt();
   choice = checkValid(choice, validChoices);
-  if (choice.toLowerCase() === validChoices[1]) currentPlayer = COMPUTER_ID;
+  
+  if (choice.toLowerCase() === validChoices[1]) {
+    currentPlayer =  COMPUTER_ID;
+    startingPlayer = COMPUTER_ID;
+  }
 }
 
 function setUpGame() {
@@ -67,11 +85,9 @@ function setUpGame() {
 }
 
 function startRound() {
-  const BASIC_GAME_SIZE = 3;
-
   if (gameData.roundCount === 0 && gameData.boardSize > BASIC_GAME_SIZE) {
-    displayRules();
-    checkValid(rlSync.prompt(), ['s']);
+    messageUser(displayGameRules());
+    checkValid(rlSync.prompt().toLowerCase(), ['s']);
   }
   if (gameData.roundCount > 0) { 
     startingPlayer = switchPlayers(startingPlayer);
@@ -83,12 +99,12 @@ function startRound() {
   } else messageUser(TEXT.computerStart);
 }
 
-function displayRules() {
+function displayGameRules() {
   let comboSize = gameData.minComboLength;
   let boardSize = gameData.boardSize + 'x' + gameData.boardSize;
   let rules = TEXT.rules;
 
-  messageUser(`${rules.a} ${boardSize} ${rules.b} ${comboSize} ${rules.c}`)
+  return `${rules.a} ${boardSize} ${rules.b} ${comboSize} ${rules.c}`
 }
 
 function chooseSquare(player) {
@@ -96,14 +112,15 @@ function chooseSquare(player) {
     gameData.moves[getPlayerMove()] = PLAYER_ID;
     messageUser(TEXT.playerTurn);
   } else {
-    gameData.moves[getComputerMove()] = COMPUTER_ID;
-    messageUser(TEXT.computerTurn);
+    let computerMove = getComputerMove();
+    gameData.moves[computerMove] = COMPUTER_ID;
+    messageUser(TEXT.computerTurn + computerMove);
   }
 }
 
 function getPlayerMove() {
   messageUser(TEXT.q.move + `1—${gameData.moveCount}`);
-  messageUser([TEXT.q.help, DIM_TEXT]);
+  messageUser([TEXT.q.help, COLOR_OF_DIM_TEXT]);
 
   let input = rlSync.prompt();
   input = checkHelpNeeded(input);
@@ -123,11 +140,6 @@ function checkHelpNeeded (input) {
 function displayGame(extraDisplay) {
   let displayGame = require('./game-display.js');
   return displayGame(gameData, EMPTY_MOVE_ID, extraDisplay);
-}
-
-function switchPlayers(id) {
-  if (id === PLAYER_ID) return COMPUTER_ID;
-  else return PLAYER_ID;
 }
 
 function checkForWinner(id) {
@@ -165,22 +177,27 @@ function checkForDraw() {
 }
 
 function continueGame() {
-  if (gameData.roundCount === 1) {
+  if (
+    gameData.score[PLAYER_ID] === ROUNDS_TO_WIN || 
+    gameData.score[COMPUTER_ID] === ROUNDS_TO_WIN
+    ) {
     endGameWithRounds();
     displayScore();
     return true;
   }
-  if (gameData.roundCount > 1) {
-    gameData.roundCount -= 1;
+  else if (gameData.roundCount === 0) {
     resetBoard();
-    displayScore();
-    return false;
+    gameData.roundCount += 1;
+    return askPlayerContinue()
   }
   else {
+    gameData.roundCount += 1;
     resetBoard();
-    gameData.roundCount = ROUND_NUM;
-    return askPlayerContinue()
-  };
+    displayScore();
+    messageUser(TEXT.q.continue)
+    checkValid(rlSync.prompt().toLowerCase(), ['c'])
+    return false;
+  }
 }
 
 function resetBoard() {
@@ -188,10 +205,10 @@ function resetBoard() {
 };
 
 function askPlayerContinue() {
-  messageUser(TEXT.q.continue);
+  messageUser(TEXT.q.continueGame);
   let choice = rlSync.prompt().toLowerCase();
   choice = checkValid(choice, ['y', 'n']);
-  return !choice === 'y';
+  return choice === 'n';
 }
 
 function displayScore() {
@@ -206,9 +223,9 @@ function endGameWithRounds() {
 let playerScore = gameData.score[PLAYER_ID]
 let computerScore = gameData.score[COMPUTER_ID]
 
-  if (playerScore > computerScore) messageUser(TEXT.playerWinsRounds);
-  else if (playerScore < computerScore) messageUser(TEXT.computerWinsRounds);
-  else messageUser(TEXT.drawRounds)
+if (playerScore === ROUNDS_TO_WIN) messageUser(TEXT.playerWinsRounds);
+else if (computerScore === ROUNDS_TO_WIN) messageUser(TEXT.computerWinsRounds);
+
 }
 
 // ## 2. Computer move logic and functions -----------------
@@ -217,24 +234,21 @@ let computerScore = gameData.score[COMPUTER_ID]
 // trys to play into open combos on the board.
 
 function getComputerMove() {
+  let computerMoves = movesByID(COMPUTER_ID);
+  let numSuperMovesPlayed = intersectsOf(superMoves(), computerMoves).length;
 
   if (winningMoves(COMPUTER_ID).length > 0) {
     return pickRandomEle(winningMoves(COMPUTER_ID));
-  } // Pick winning move if available
-  
+  }
   if (winningMoves(PLAYER_ID).length > 0) {
     return pickRandomEle(winningMoves(PLAYER_ID));
-  } // Block players winning move if needed
-  
-  let superMovesPlayed = intersectsOf(superMoves(), movesByID(COMPUTER_ID));
-  if (superMoves().length > 0 && superMovesPlayed.length <= 0) {
+  }
+  if (superMoves().length > 0 && numSuperMovesPlayed < 1) {
     return pickRandomEle(superMoves());
-  } // Play 1x random center square 'supermove' (4x superMoves on even boards)
-
-  if (comboMoves().length > 0) {
-    return pickRandomEle(comboMoves());
-  } // Play move thats part of an open 'combo' on the board
-
+  }
+  if (comboMoves(COMPUTER_ID).length > 0) {
+    return pickRandomEle(comboMoves(COMPUTER_ID));
+  }
   return pickRandomEle(movesByID(EMPTY_MOVE_ID));
 }
 
@@ -253,35 +267,50 @@ function winningMoves(id) {
   return intersectsOf(winningMoves, movesByID(EMPTY_MOVE_ID));
 }
 
-function comboMoves() {
-  let smartMoves = [];
-  let computerMoves = movesByID(PLAYER_ID);
+function comboMoves(ID) {
+  let p1ComboMoves = getComboMatches(ID);
+  let p2ComboMoves = getComboMatches(switchPlayers(ID));
 
-  gameData.combos.forEach(combo => {
-    let comboMoves = intersectsOf(combo, computerMoves);
-    let possibleComboMoves = intersectsOf(comboMoves, movesByID(EMPTY_MOVE_ID));
-    let moves = smartMoves.concat(possibleComboMoves);
-  });
-  return smartMoves;
+  console.log('p1ComboMoves:');
+  console.log(p1ComboMoves);
+
+  console.log('p2ComboMoves:');
+  console.log(p2ComboMoves);
+
+  // p1ComboMoves.filter(move => !p2ComboMoves.includes(move))
+
+  console.log('p1ComboMoves after filter')
+  console.log(p1ComboMoves)
+  
+  return p1ComboMoves;
 }
 
-function comboMoves() {
-  let smartMoves = [];
-  let computerMoves = movesByID(COMPUTER_ID);
+function getComboMatches(ID) {
+  let comboMoves = [];
+  console.log('comboMoves')
 
   gameData.combos.forEach(combo => {
-    let comboMoves = intersectsOf(combo, computerMoves);
-    let possibleComboMoves = intersectsOf(comboMoves, movesByID(EMPTY_MOVE_ID));
-    smartMoves.concat(possibleComboMoves);
+    let completedMoves = intersectsOf(combo, movesByID(ID));
+    let availableMoves = combo.filter(move => !completedMoves.includes(move));
+
+    comboMoves.concat(availableMoves);
+
+    
+    console.log(comboMoves)
+
   });
-  return smartMoves;
+  return comboMoves;
 }
+
+// if combo includes playerMove, don't return it
+// return sorted list of combos based on frequency of # low to high
 
 function superMoves() {
-  let centerMove = Math.ceil(gameData.moveCount / 2);
-  if (gameData.moveCount % 2 === 1) return [String(centerMove)];
-
   let superMoves = [];
+  let centerMove = Math.ceil(gameData.moveCount / 2);
+
+  if (gameData.moveCount % 2 === 1) superMoves.push(String(centerMove));
+
   if (gameData.moveCount % 2 === 0) {
     let halfRowLength =  gameData.boardSize / 2;
     let num1 = centerMove - halfRowLength;
@@ -289,11 +318,12 @@ function superMoves() {
     superMoves.push(num1, num1 + 1, num3, num3 + 1);
     superMoves = superMoves.map(move => String(move));
   }
-  return intersectsOf(superMoves, movesByID(EMPTY_MOVE_ID));
+  return superMoves;
 }
 
 
 // ## 3. Helper functions --------------------------
+// -------------------------------------------------
 
 function movesByID(ID) {
   let moveList = Object.keys(gameData.moves);
@@ -318,10 +348,12 @@ function checkValid(item, arrayValidItems = movesByID(EMPTY_MOVE_ID)) {
   return item;
 }
 
-function joinOr(array, endChars = '') {
+function joinOr(array, wrapChar = '', endChar = '') {
+  array = array.map(ele => wrapChar + ele + wrapChar);
+
   let lastIdx = array.length - 1;
   let joined = array.slice(0, lastIdx).join(', ');
-  return `${joined} or ${array[lastIdx]}${endChars}`;
+  return `${joined} or ${array[lastIdx]}${endChar}`;
 }
 
 function reassignAllValues(object, value) {
@@ -335,6 +367,11 @@ function messageUser(...messages) {
   });
 }
 
+function switchPlayers(id) {
+  if (id === PLAYER_ID) return COMPUTER_ID;
+  else return PLAYER_ID;
+}
+
 // Update instruction for combo length and it's position in game order.
 
 // Check the endgame logic, game ends it player and computer have 1 point each.
@@ -344,4 +381,4 @@ function messageUser(...messages) {
 
 // Tidy function order
 // Thoroughly test game
-// eslint files
+// Final eslint of files

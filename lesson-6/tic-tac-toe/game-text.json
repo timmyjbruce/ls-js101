@@ -1,32 +1,33 @@
 {
   "welcome": "\n### Welome to TicTacToe! ###\n",
-  "thanks": "Thanks for playing TicTacToe!\n",
+  "thanks": "\nThanks for playing TicTacToe!\n",
   "q": {
     "move": "Choose an available square from ",
     "moveShort": "Enter an available square number:",
     "help": "Enter '#' to show square numbers",
-    "continue": "Would you like to play best of 3 (Y/N)",
+    "continueGame": "Would you like to play best of 3 (Y/N)",
+    "continue": "Enter 'c' to continue.",
     "size": "Q.What size game board would you like, eg 3x3, 4x4, 5x5 etc?\n  Enter: ",
     "startingPlayer": "\nQ.Who should start? You or the computer?\n  Enter: "
   },
   "playerTurn": "\nYour move was added:",
-  "computerTurn": "\nThe computer has played:",
+  "computerTurn": "\nThe computer has played into square #",
   "rules": {
-    "a": "\n#.FYI on",
+    "a": "\n# FYI on",
     "b": "sized boards the first to get",
     "c": "in a row wins! \n  Enter 's' to get started:"
   },
   "invalid": "That's an invalid choice, please try again",
   "draw": "### This round is a draw! ###\n",
   "drawEarly": "### Hmm, looks like no one can win from here. It's a draw! ###\n",
-  "playerWinsRounds": "### Player has beat the computer in best of three!  ###\n",
-  "computerWinsRounds": "### Computer has beat the player in best of three!  ###\n",
+  "playerWinsRounds": "### Player has beat the computer in best of three! ###\n",
+  "computerWinsRounds": "### Computer has beat the player in best of three! ###\n",
   "drawRounds": "### 3 rounds have been played, and it's a draw! ###",
-  "playerStart": "\nAlright, lets get started!",
+  "playerStart": "\nAlright, make your move!",
   "computerStart": "\nAlright, the computer made a move, now it's your turn!",
   "score": "This score is ",
   "winner": { 
-    "X": "### X's win this round! ###\n",
-    "O": "### O's win this round! ###\n"
+    "X": "### You win this round! ###\n",
+    "O": "### Computer wins this round! ###\n"
   } 
 }

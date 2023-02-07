@@ -1,0 +1,32 @@
+{
+    "welcome": "\nWelcome to 21!\n",
+    "rulesHeading": "How it works:",
+    "rules": {
+        "1": "The player with the closest score to 21 wins",
+        "2": "You go first, but if there's a draw the dealer wins",
+        "3": "Number cards are worth their number value",
+        "4": "Face cards are worth 10",
+        "5": "Aces are worth 1 or 11"
+        },
+    "intro": "Beat the dealer to the score of 21.\n",
+    "start": "\nEnter 'd' to deal!",
+    "initialDeal": "\nThe dealer slides your cards across the table\n",
+    "invalid": "Invalid input, please try again",
+    "dealing": "The dealer slides you two cards across the table.",
+    "askHitOrStay": "Would you like to hit (h), or stay (s)?",
+    "playerHand": "You have the ",
+    "playerBust": "\nYour bust, dealer wins!",
+    "dealerTurn": "Now for the dealers turn!",
+    "dealerBust": "\n!!! You win, dealer is bust !!!",
+    "dealerWins": "\nDealer wins!",
+    "playerWins": "\n!!! You win !!!",
+    "dealerHandA": "The dealer has the ",
+    "dealerHandB": " and one other card\n",
+    "dealerReveal": "In the dealers hand is the ",
+    "dealerStay": "Dealer stays!",
+    "dealerHits": "Dealer hits!",
+    "playAgain": "Would you like to play best of 5 rounds?\nEnter yes (y) or no (n)",
+    "playerWinsGame": "Player has won the game",
+    "dealerWinsGame": "Dealer has won the game",
+    "thanks": "Thanks for playing 21!"
+}
